@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate World | Sweet Moments</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8ed;
+            color: #402014;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #3b1f14;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #e8b878;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e8b878;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            min-height: 520px;
+            padding: 80px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background:
+                linear-gradient(rgba(40, 19, 10, 0.65),
+                                rgba(40, 19, 10, 0.75)),
+                url("https://images.unsplash.com/photo-1548907040-4d42f9b8b5e4?auto=format&fit=crop&w=1600&q=85")
+                center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 5vw, 60px);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 28px;
+        }
+
+        .hero .tagline {
+            color: #f4c987;
+            font-size: 17px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #b8783e;
+            color: white;
+            padding: 13px 28px;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #7a4225;
+            transform: translateY(-3px);
+        }
+
+        /* COMMON SECTION */
+
+        section {
+            padding: 65px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            color: #542d1c;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #8b6a54;
+            margin-bottom: 35px;
+        }
+
+        /* PRODUCTS */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .chocolate-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(70, 35, 15, 0.12);
+            transition: 0.35s;
+        }
+
+        .chocolate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(70, 35, 15, 0.2);
+        }
+
+        .chocolate-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            font-size: 21px;
+            color: #542d1c;
+            margin-bottom: 8px;
+        }
+
+        .card-content p {
+            color: #806553;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #9a542c;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-content .btn {
+            padding: 10px 23px;
+        }
+
+        /* ABOUT */
+
+        .about {
+            background: #f0dfcb;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .about-content p {
+            font-size: 17px;
+            margin: 20px 0;
+            color: #654735;
+        }
+
+        .about-icons {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .about-icons div {
+            font-weight: bold;
+            color: #542d1c;
+        }
+
+        .about-icons span {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        /* CONTACT */
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 950px;
+            margin: auto;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            color: #70513e;
+        }
+
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(70, 35, 15, 0.1);
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #dfcbb8;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        form input:focus,
+        form textarea:focus {
+            outline: 2px solid #b8783e;
+            border-color: transparent;
+        }
+
+        form .btn {
+            width: 100%;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #3b1f14;
+            color: white;
+            text-align: center;
+            padding: 30px 8%;
+        }
+
+        .footer-links {
+            margin: 15px 0;
+        }
+
+        .footer-links a {
+            color: #f4c987;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social {
+            font-size: 23px;
+            margin: 12px 0;
+        }
+
+        .social a {
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        footer p {
+            color: #ead7c5;
+            margin-top: 8px;
+        }
+
+        /* ANIMATION */
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 900px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            header {
+                padding: 18px 5%;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .hero {
+                min-height: 430px;
+                padding: 55px 5%;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 45px 5%;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .chocolate-card img {
+                height: 230px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">🍫 Chocolate <span>World</span></div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HOME -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="tagline">SWEET MOMENTS, DELICIOUS CHOCOLATES!</p>
+
+            <h1>Welcome to Chocolate World!</h1>
+
+            <p>Discover the happiness hidden in every bite.
+               Make every moment sweeter with our delicious chocolates.</p>
+
+            <a href="#products" class="btn">Explore Chocolates 🍫</a>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+        <h2 class="section-title">Our Delicious Chocolates</h2>
+        <p class="section-subtitle">
+            A little sweetness makes every day special.
+        </p>
+
+        <div class="products">
+
+            <div class="chocolate-card">
+                <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80"
+                     alt="Dark chocolate">
+                <div class="card-content">
+                    <h3>Dark Chocolate</h3>
+                    <p>Rich, smooth, and full of chocolate flavour.</p>
+                    <div class="price">₹150</div>
+                    <button class="btn" onclick="buyChocolate('Dark Chocolate')">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="chocolate-card">
+                <img src="https://images.unsplash.com/photo-1548907040-4d42f9b8b5e4?auto=format&fit=crop&w=600&q=80"
+                     alt="Milk chocolate">
+                <div class="card-content">
+                    <h3>Milk Chocolate</h3>
+                    <p>A creamy and delightful chocolate treat.</p>
+                    <div class="price">₹120</div>
+                    <button class="btn" onclick="buyChocolate('Milk Chocolate')">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="chocolate-card">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
+                     alt="White chocolate">
+                <div class="card-content">
+                    <h3>White Chocolate</h3>
+                    <p>Sweet, creamy, and wonderfully delicious.</p>
+                    <div class="price">₹100</div>
+                    <button class="btn" onclick="buyChocolate('White Chocolate')">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="chocolate-card">
+                <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=80"
+                     alt="Chocolate truffles">
+                <div class="card-content">
+                    <h3>Chocolate Truffles</h3>
+                    <p>Delicate chocolate treats for special moments.</p>
+                    <div class="price">₹180</div>
+                    <button class="btn" onclick="buyChocolate('Chocolate Truffles')">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="chocolate-card">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
+                     alt="Chocolate brownies">
+                <div class="card-content">
+                    <h3>Chocolate Brownies</h3>
+                    <p>Soft, rich, and delicious chocolate brownies.</p>
+                    <div class="price">₹200</div>
+                    <button class="btn" onclick="buyChocolate('Chocolate Brownies')">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="chocolate-card">
+                <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80"
+                     alt="Chocolate gift box">
+                <div class="card-content">
+                    <h3>Chocolate Gift Box</h3>
+                    <p>A sweet gift to make someone smile.</p>
+                    <div class="price">₹350</div>
+                    <button class="btn" onclick="buyChocolate('Chocolate Gift Box')">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2 class="section-title">About Chocolate World</h2>
+
+            <p>
+                Welcome to Chocolate World, a special place for chocolate lovers!
+                We believe that chocolate is more than a sweet treat.
+                It brings people together, creates beautiful memories,
+                and makes ordinary moments extraordinary.
+            </p>
+
+            <p>
+                From rich dark chocolate to creamy milk chocolate and
+                delightful brownies, discover a world of sweetness
+                made for every occasion.
+            </p>
+
+            <div class="about-icons">
+                <div>
+                    <span>🍫</span>
+                    Delicious Treats
+                </div>
+
+                <div>
+                    <span>🎁</span>
+                    Perfect Gifts
+                </div>
+
+                <div>
+                    <span>❤️</span>
+                    Made with Love
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">
+            We would love to hear from you!
+        </p>
+
+        <div class="contact-container">
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+
+                <p>📧 Email: chocolateworld@example.com</p>
+                <p>📞 Phone: +91 98765 43210</p>
+                <p>📍 Location: India</p>
+
+                <p>
+                    Have a question about our chocolates?
+                    Send us a message using the contact form.
+                </p>
+            </div>
+
+            <form id="contactForm">
+                <input type="text" id="name"
+                       placeholder="Your Name" required>
+
+                <input type="email" id="email"
+                       placeholder="Your Email" required>
+
+                <textarea id="message"
+                          placeholder="Your Message"
+                          required></textarea>
+
+                <button type="submit" class="btn">
+                    Send Message ✉️
+                </button>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="logo">🍫 Chocolate World</div>
+
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="social">
+            <a href="https://www.instagram.com/"
+               target="_blank" rel="noopener"
+               aria-label="Instagram">📸</a>
+
+            <a href="https://www.facebook.com/"
+               target="_blank" rel="noopener"
+               aria-label="Facebook">📘</a>
+
+            <a href="https://www.youtube.com/"
+               target="_blank" rel="noopener"
+               aria-label="YouTube">▶️</a>
+        </div>
+
+        <p>Made with Love and Chocolate! ❤️</p>
+        <p>&copy; 2026 Chocolate World. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        function buyChocolate(productName) {
+            alert("Thank you for choosing " + productName +
+                  "! Online ordering will be available soon. 🍫");
+        }
+
+        document.getElementById("contactForm")
+            .addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const name = document.getElementById("name").value.trim();
+
+                alert("Thank you, " + name +
+                      "! Your message has been received.");
+
+                this.reset();
+            });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate World | Sweet Moments</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff8ed;color:#402014;font-family:Arial,sans-serif}
+header,footer{background:#3b1f14;color:white;padding:18px;text-align:center}
+nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:12px}
+nav a{color:white;text-decoration:none}
+h1,h2{color:#542d1c;text-align:center}
+.hero{text-align:center;padding:25px}
+input,select{padding:12px;border:1px solid #b8783e;border-radius:8px;margin:5px}
+.filters{text-align:center;margin:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;padding:20px}
+.card{background:white;border-radius:14px;padding:12px;text-align:center;box-shadow:0 3px 12px #0002;position:relative;transition:.3s}
+.card:hover{transform:translateY(-5px)}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:10px}
+.badge{position:absolute;top:18px;left:18px;background:#e8b878;padding:6px;border-radius:6px}
+.price{font-size:20px;color:#b8783e;font-weight:bold}
+del{color:#888;font-size:14px}
+button{background:#b8783e;color:white;border:0;padding:9px;border-radius:7px;cursor:pointer;margin:3px}
+button:hover{background:#542d1c}
+.heart{background:#fff0e0;color:#542d1c}
+#message{text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+<h2 style="color:#e8b878">🍫 Chocolate World</h2>
+<p>Sweet Memorys, Delicious Chocolates!</p>
+<nav>
+<a href="#home">Home</a><a href="#products">Products</a>
+<a href="#offers">Offers</a><a href="#about">About Us</a>
+<a href="#contact">Contact</a><a href="#products">🛒 Cart (<span id="cart">0</span>)</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<h1>Our Chocolate Collection</h1>
+<p>Discover your favourites and make every moment sweeter!</p>
+</section>
+<style>
+.deals{background:#3b1f14;color:#fff8ed;padding:25px;
+text-align:center;border-radius:15px;margin:20px}
+.deals h2{color:#e8b878}
+.deal{display:inline-block;background:#fff8ed;color:#402014;
+padding:18px;margin:10px;border-radius:12px;width:220px}
+.deal button{background:#b8783e;color:white;border:0;
+padding:10px;border-radius:7px;cursor:pointer}
+.price{color:#b8783e;font-size:22px;font-weight:bold}
+</style>
+
+<section class="deals" id="combo">
+<h2>🍫 Sweet Deals & Combo Offers 🎁</h2>
+<p>More Chocolates, More Happiness!</p>
+
+<div class="deal">
+<h3>🍫 Chocolate Lovers Combo</h3>
+<p>Dark + Milk + White Chocolate</p>
+<del>₹600</del>
+<p class="price">₹449</p>
+<button onclick="addCombo(449)">Add Combo</button>
+</div>
+
+<div class="deal">
+<h3>🎁 Premium Gift Box</h3>
+<p>Assorted chocolates for your loved ones</p>
+<del>₹799</del>
+<p class="price">₹599</p>
+<button onclick="addCombo(599)">Add Combo</button>
+</div>
+
+<div class="deal">
+<h3>🍪 Choco Snack Box</h3>
+<p>Brownies + Cookies + Wafers</p>
+<del>₹450</del>
+<p class="price">₹349</p>
+<button onclick="addCombo(349)">Add Combo</button>
+</div>
+</section>
+<section id="products">
+<div class="filters">
+<input id="search" placeholder="Search your favourite chocolate...">
+<button onclick="search.value='';show()">Clear</button><br>
+<select id="category" onchange="show()">
+<option value="All">All Categories</option>
+<option>Chocolate</option><option>Bakery</option><option>Gifts</option>
+</select>
+</div>
+<div class="filters"><button onclick="sortPrice()">Sort by Price ↑</button></div>
+<div class="grid" id="grid"></div>
+<p id="message"></p>
+</section>
+
+<section id="offers" class="hero">
+<h2>Special Offers 🎁</h2>
+<p>Enjoy delicious chocolates at discounted prices!</p>
+</section>
+<section id="about" class="hero">
+<h2>About Us</h2><p>We make every moment sweeter with delightful chocolates.</p>
+</section>
+<section id="contact" class="hero">
+<h2>Contact Us</h2><p>Email: hello@chocolateworld.example</p>
+</section>
+<footer>© 2026 Chocolate World | Sweet Moments 🍫</footer>
+
+<script>
+const names=["Dark Chocolate","Milk Chocolate","White Chocolate","Chocolate Truffles","Chocolate Brownies","Chocolate Gift Box","Caramel Chocolate","Hazelnut Chocolate","Chocolate Wafer","Chocolate Cookies","Almond Chocolate","Assorted Chocolate Box"];
+const pics=["dark chocolate bar","milk chocolate bar","white chocolate pieces","chocolate truffle balls","chocolate brownies","chocolate gift box","caramel chocolate","hazelnut chocolate","chocolate wafer","chocolate cookies","almond chocolate bar","assorted chocolate box"];
+const prices=[200,180,220,300,250,600,240,280,100,180,260,500];
+const cats=["Chocolate","Chocolate","Chocolate","Chocolate","Bakery","Gifts","Chocolate","Chocolate","Chocolate","Bakery","Chocolate","Gifts"];
+let cart=0,products=names.map((name,i)=>({name,price:prices[i],cat:cats[i],i}));
+
+function show(){
+let q=document.getElementById("search").value.toLowerCase();
+let c=document.getElementById("category").value;
+let list=products.filter(p=>p.name.toLowerCase().includes(q)&&(c==="All"||p.cat===c));
+grid.innerHTML=list.map(p=>`
+<div class="card">
+<span class="badge">25% OFF</span>
+<img src="https://placehold.co/300x200/fff0d9/542d1c?text=${encodeURIComponent(p.name)}"
+alt="${p.name}" onerror="this.onerror=null;this.src='chocolate-fallback.jpg'">
+<h3>${p.name}</h3><p>Delicious and freshly selected treat.</p>
+<p>Weight: 100 g</p><del>₹${p.price}</del>
+<p class="price">₹${Math.round(p.price*.75)}</p>
+<p>⭐ 4.8/5 <small>(Sample rating)</small></p>
+<button onclick="cart++;document.getElementById('cart').textContent=cart">Add to Cart</button>
+<button onclick="alert('Please contact us to complete your purchase.')">Buy Now</button>
+<button class="heart" onclick="this.textContent=this.textContent==='♡'?'♥':'♡'">♡</button>
+</div>`).join("");
+message.textContent=list.length?"":"No chocolates found. Try another search!";
+}
+search.addEventListener("input",show);
+function sortPrice(){products.sort((a,b)=>a.price-b.price);show()}
+show();
+</script>
+</body>
+</html>
